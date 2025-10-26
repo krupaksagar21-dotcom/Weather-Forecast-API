@@ -1,0 +1,16 @@
+import requests
+
+API_KEY = "6f49fd2d816f58705354c12b4b8fbdae"
+BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+city = input("banlore: ")
+
+response = requests.get(BASE_URL, params={"q": city, "appid": API_KEY, "units": "metric"})
+
+if response.status_code == 200:
+    data = response.json()
+    print(f"\nWeather in {data['name']}:")
+    print(f"Temperature: {data['main']['temp']}°C")
+    print(f"Condition: {data['weather'][0]['description'].title()}")
+else:
+    print("City not found or error fetching data!")
